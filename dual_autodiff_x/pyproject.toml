@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools", "wheel", "cython"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dual_autodiff_x"  
+version = "0.1.0"         
+description = "A Cythonized package for dual number automatic differentiation"
+
+license = { text = "MIT" }
+dependencies = []

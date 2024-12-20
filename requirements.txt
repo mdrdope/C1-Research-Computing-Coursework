@@ -1,0 +1,12 @@
+# requires python 3.9
+numpy==2.0.2
+scipy==1.13.1
+matplotlib==3.9.4
+pytest==8.3.4
+sphinx==7.4.7
+nbsphinx==0.9.5
+sphinx-rtd-theme==3.0.2
+sphinx-autodoc-typehints==2.3.0
+cibuildwheel==2.22.0
+cython==3.0.11
+ipykernel==6.9.0

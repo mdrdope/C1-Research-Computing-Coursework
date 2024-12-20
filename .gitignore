@@ -1,0 +1,45 @@
+# Python cache files
+*.pyc               # Compiled Python files
+*.pyo               # Optimized Python bytecode files
+*.pyd               # Python dynamic library files
+**/__pycache__/
+
+
+
+# Editor and OS generated files
+Thumbs.db           # Windows thumbnail cache
+.vscode/            # Visual Studio Code workspace settings
+.idea/              # IntelliJ IDEA project settings
+
+# Virtual environments
+env/                # Virtual environment folder
+venv/               # Alternate virtual environment folder
+
+# Build output
+dist/               # Distribution directory
+
+# Python packaging tool generated files
+*.egg-info/         # Egg metadata folder
+*.egg               # Egg file
+
+# Log files
+*.log               # Log files
+
+# Test and coverage tool output
+.coverage           # Coverage tool data file
+coverage/           # Coverage directory
+*.cover             # Coverage report files
+htmlcov/            # HTML coverage report
+
+# Temporary files
+*.tmp               # Temporary files
+*.temp              # Alternate temporary files
+
+
+# pip local environment installation
+pip-wheel-metadata/ # pip wheel metadata folder
+.ipynb_checkpoints/
+
+
+
+"dual_autodiff_docker/dual_autodiff_x_nb.tar" 

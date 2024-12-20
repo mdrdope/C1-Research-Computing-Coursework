@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: dual_autodiff_x
+Version: 0.1.0
+Summary: A Cythonized package for dual number automatic differentiation
+Author-email: Your Name <your.email@example.com>
+License: MIT

@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dual_autodiff.dual &mdash; Dual Number Auto Differentiation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Dual Number Auto Differentiation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">dual_autodiff Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dual_autodiff.html">Tutorial: Using <code class="docutils literal notranslate"><span class="pre">dual_autodiff</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Dual Number Auto Differentiation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dual_autodiff.dual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dual_autodiff.dual</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<div class="viewcode-block" id="Dual">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual">[docs]</a>
+<span class="k">class</span> <span class="nc">Dual</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent dual numbers for automatic differentiation.</span>
+
+<span class="sd">    Dual numbers are represented as:</span>
+<span class="sd">        x = a + bE</span>
+<span class="sd">    where E is the dual unit with the property E * E = 0.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        real (float): The real part of the dual number.</span>
+
+<span class="sd">        dual (float): The dual part of the dual number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Methods:</span>
+    <span class="c1"># __add__(other):</span>
+    <span class="c1">#     Adds two dual numbers or a dual number with a scalar.</span>
+
+    <span class="c1"># __sub__(other):</span>
+    <span class="c1">#     Subtracts two dual numbers or a dual number with a scalar.</span>
+
+    <span class="c1"># __mul__(other):</span>
+    <span class="c1">#     Multiplies two dual numbers or a dual number with a scalar.</span>
+
+    <span class="c1"># __truediv__(other):</span>
+    <span class="c1">#     Divides a dual number by another dual number or a scalar.</span>
+
+    <span class="c1"># __pow__(power):</span>
+    <span class="c1">#     Raises a dual number to a scalar or another dual number.</span>
+
+    <span class="c1"># __neg__():</span>
+    <span class="c1">#     Negates a dual number.</span>
+
+    <span class="c1"># sin():</span>
+    <span class="c1">#     Computes the sine of the dual number.</span>
+
+    <span class="c1"># cos():</span>
+    <span class="c1">#     Computes the cosine of the dual number.</span>
+
+    <span class="c1"># tan():</span>
+    <span class="c1">#     Computes the tangent of the dual number.</span>
+
+    <span class="c1"># exp():</span>
+    <span class="c1">#     Computes the exponential of the dual number.</span>
+
+    <span class="c1"># log():</span>
+    <span class="c1">#     Computes the natural logarithm of the dual number.</span>
+
+    <span class="c1"># sqrt():</span>
+    <span class="c1">#     Computes the square root of the dual number.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">real</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dual</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a Dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            real (float): The real part of the dual number.</span>
+
+<span class="sd">            dual (float, optional): The dual part of the dual number. Defaults to 1.0 for differential propagation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">real</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">=</span> <span class="n">dual</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the string representation of the dual number.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: String representation in the format Dual(real=a, dual=b).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Dual(real=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="si">}</span><span class="s1">, dual=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="si">}</span><span class="s1">)&#39;</span>
+
+<div class="viewcode-block" id="Dual.__add__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__add__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add this dual number to another dual number or scalar.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            other (Dual, float, int): The other operand, represented as:</span>
+<span class="sd">                - A scalar s.</span>
+<span class="sd">                - A dual number c + dE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                If `other` is a scalar s:</span>
+<span class="sd">                    Real part: a + s</span>
+
+<span class="sd">                    Dual part: b</span>
+
+<span class="sd">                If `other` is a Dual number c + dE:</span>
+<span class="sd">                    Real part: a + c</span>
+
+<span class="sd">                    Dual part: b + d</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `other` is not a Dual number, float, or int.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported operand type(s) for +: &#39;Dual&#39; and &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></div>
+
+
+    <span class="fm">__radd__</span> <span class="o">=</span> <span class="fm">__add__</span>
+
+<div class="viewcode-block" id="Dual.__sub__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__sub__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Subtract another dual number or scalar from this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            other (Dual, float, int): The other operand, represented as:</span>
+<span class="sd">                - A scalar s.</span>
+<span class="sd">                - A dual number c + dE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                If `other` is a scalar s:</span>
+<span class="sd">                    Real part: a - s</span>
+
+<span class="sd">                    Dual part: b</span>
+
+<span class="sd">                If `other` is a Dual number c + dE:</span>
+<span class="sd">                    Real part: a - c</span>
+
+<span class="sd">                    Dual part: b - d</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `other` is not a Dual number, float, or int.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported operand type(s) for -: &#39;Dual&#39; and &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.__rsub__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__rsub__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Subtract this dual number from a scalar.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            other (float, int): The scalar operand s.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: s - a</span>
+
+<span class="sd">                Dual part: -b</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `other` is not a float or int.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">other</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported operand type(s) for -: &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; and &#39;Dual&#39;&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Dual.__mul__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__mul__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Multiply this dual number by another dual number or scalar.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            other (Dual, float, int): The other operand, represented as:</span>
+<span class="sd">                - A scalar s.</span>
+<span class="sd">                - A dual number c + dE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                If `other` is a scalar s:</span>
+<span class="sd">                    Real part: a * s</span>
+
+<span class="sd">                    Dual part: b * s</span>
+
+<span class="sd">                If `other` is a Dual number c + dE:</span>
+<span class="sd">                    Real part: a * c</span>
+
+<span class="sd">                    Dual part: a * d + b * c</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `other` is not a Dual number, float, or int.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dual</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">*</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported operand type(s) for *: &#39;Dual&#39; and &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></div>
+
+
+    <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
+
+<div class="viewcode-block" id="Dual.__truediv__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__truediv__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Divide this dual number by another dual number or scalar.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            other (Dual, float, int): The divisor, represented as:</span>
+<span class="sd">                - A scalar s.</span>
+<span class="sd">                - A dual number c + dE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                If `other` is a scalar s:</span>
+<span class="sd">                    Real part: a / s</span>
+
+<span class="sd">                    Dual part: b / s</span>
+
+<span class="sd">                If `other` is a Dual number c + dE:</span>
+<span class="sd">                    Real part: a / c</span>
+
+<span class="sd">                    Dual part: (b * c - a * d) / c*c</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `other` is not a Dual number, float, or int.</span>
+<span class="sd">            ZeroDivisionError: If dividing by zero (real part of `other` is zero).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Division by zero: real part of the divisor is zero.&quot;</span><span class="p">)</span>
+            <span class="n">real_part</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">dual_part</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">real</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">real_part</span><span class="p">,</span> <span class="n">dual_part</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Division by zero.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">/</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported operand type(s) for /: &#39;Dual&#39; and &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.__rtruediv__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__rtruediv__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Divide a scalar by this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            other (float, int): The numerator, represented as a scalar s.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: s / a</span>
+
+<span class="sd">                Dual part: - (s * b) / a*a</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `other` is not a float or int.</span>
+<span class="sd">            ZeroDivisionError: If dividing by a Dual number with zero real part (a = 0).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Division by zero in dual number.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="n">real_part</span> <span class="o">=</span> <span class="n">other</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">dual_part</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">real_part</span><span class="p">,</span> <span class="n">dual_part</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported operand type(s) for /: &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; and &#39;Dual&#39;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.__pow__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__pow__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Raise this dual number to a scalar or another dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">            power (Dual, float, int): The exponent, represented as:</span>
+<span class="sd">                - A scalar p.</span>
+<span class="sd">                - A dual number c + dE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual: </span>
+<span class="sd">                If `power` is a scalar p:</span>
+<span class="sd">                    Real part: a^p</span>
+
+<span class="sd">                    Dual part: p * a^(p-1) * b</span>
+
+<span class="sd">                If `power` is a Dual number c + dE:</span>
+<span class="sd">                    Real part: a^c</span>
+
+<span class="sd">                    Dual part: a^c * (c * b / a + d * log(a))</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `power` is not a Dual number, float, or int.</span>
+<span class="sd">            ValueError: If a &lt;= 0 and `power` is a Dual number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Real part must be non-negative for non-integer exponents.&quot;</span><span class="p">)</span>
+            <span class="n">real</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">**</span> <span class="n">power</span>
+            <span class="n">dual</span> <span class="o">=</span> <span class="n">power</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">**</span> <span class="p">(</span><span class="n">power</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">dual</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Real part must be positive for dual exponentiation.&quot;</span><span class="p">)</span>
+            <span class="n">log_a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+            <span class="n">real</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">**</span> <span class="n">power</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">dual</span> <span class="o">=</span> <span class="n">real</span> <span class="o">*</span> <span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">dual</span> <span class="o">*</span> <span class="n">log_a</span> <span class="o">+</span> <span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">dual</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported exponent type: &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">power</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.__neg__">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.__neg__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Negate this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: -a</span>
+
+<span class="sd">                Dual part: -b</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.sin">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.sin">[docs]</a>
+    <span class="k">def</span> <span class="nf">sin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the sine of this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: sin(a)</span>
+
+<span class="sd">                Dual part: b * cos(a)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `self` is not an instance of Dual.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a Dual number.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.cos">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.cos">[docs]</a>
+    <span class="k">def</span> <span class="nf">cos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the cosine of this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: cos(a)</span>
+
+<span class="sd">                Dual part: -b * sin(a)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `self` is not an instance of Dual.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a Dual number.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.tan">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.tan">[docs]</a>
+    <span class="k">def</span> <span class="nf">tan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the tangent of this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: tan(a)</span>
+
+<span class="sd">                Dual part: b / cos(a)*cos(a)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `self` is not an instance of Dual.</span>
+<span class="sd">            ValueError: If cos(a) is zero (tangent is undefined).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a Dual number.&quot;</span><span class="p">)</span>
+        <span class="n">cos_real</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cos_real</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Undefined tan at this real part.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">/</span> <span class="p">(</span><span class="n">cos_real</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Dual.exp">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.exp">[docs]</a>
+    <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the exponential of this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: exp(a)</span>
+
+<span class="sd">                Dual part: b * exp(a)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `self` is not an instance of Dual.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a Dual number.&quot;</span><span class="p">)</span>
+        <span class="n">exp_real</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">exp_real</span><span class="p">,</span> <span class="n">exp_real</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.log">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.log">[docs]</a>
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the natural logarithm of this dual number.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: log(a)</span>
+
+<span class="sd">                Dual part: b / a</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `self` is not an instance of Dual.</span>
+<span class="sd">            ValueError: If a &lt;= 0 (logarithm undefined).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a Dual number.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Log undefined for non-positive real parts.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Dual.sqrt">
+<a class="viewcode-back" href="../../modules.html#dual_autodiff.dual.Dual.sqrt">[docs]</a>
+    <span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the square root of this dual number by leveraging the __pow__ method.</span>
+
+<span class="sd">        Input:</span>
+<span class="sd">            self (Dual): A dual number represented as a + bE.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dual:</span>
+<span class="sd">                Real part: sqrt(a)</span>
+<span class="sd">                </span>
+<span class="sd">                Dual part: b / (2 * sqrt(a))</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If `self` is not an instance of Dual.</span>
+<span class="sd">            ValueError: If a &lt; 0 (square root undefined).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__pow__</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yi Ma (ym432).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
